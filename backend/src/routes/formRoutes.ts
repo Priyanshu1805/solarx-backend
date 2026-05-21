@@ -12,8 +12,8 @@ router.post('/submit', async (req, res) => {
     const formData = new FormData({ name, email, message });
     await formData.save();
 
-    // Send Email Notification
-    await sendEmail(email, name, message);
+    // Send Email Notification (Background process so form submits instantly)
+    sendEmail(email, name, message);
 
     // Instant Greeting Message
     res.status(200).json({
